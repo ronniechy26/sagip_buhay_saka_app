@@ -51,6 +51,7 @@ export default function App() {
                       borderColor : Colors.error
                     } : {}
                   ]}  
+                  autoCompleteType="email"
                   placeholder="Email"
                   onChangeText={props.handleChange('email')}
                   value={props.values.email}
@@ -60,10 +61,11 @@ export default function App() {
                 <TextInput 
                   style={[
                     styles.textInput, 
-                    props.touched.email && props.errors.email ? {
+                    props.touched.password && props.errors.password ? {
                       borderColor : Colors.error
                     } : {}
                   ]} 
+                  autoCompleteType="password"
                   placeholder="Password"
                   secureTextEntry={true}
                   onChangeText={props.handleChange('password')}
@@ -124,13 +126,14 @@ const styles = StyleSheet.create({
     marginBottom : 5,
   },
   textInput : {
-    fontFamily : "nunito-semibold",
+    fontFamily : "nunito-regular",
     color: Colors.black,
     borderColor : Colors.primary,
     borderRadius : 10,
     borderWidth : 1,
     padding : 8,
-    fontSize : 16,
-    marginTop : 5
+    fontSize : 14,
+    marginTop : 5,
+    paddingLeft : 20
   },
 });

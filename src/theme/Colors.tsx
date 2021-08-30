@@ -1,4 +1,4 @@
-export const Colors = {
+const Colors = {
     primary : 'rgb(0, 96, 100)',
     secondary : 'rgb(81, 156, 42',
     tertiary : 'rgb(0, 152, 159)',
@@ -8,3 +8,5 @@ export const Colors = {
     darkGray : '#808080',
     error : 'crimson'
 }
+
+export default Colors;

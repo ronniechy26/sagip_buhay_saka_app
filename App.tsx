@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Login from './src/screens/Login/index';
 import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
+
+import Root from './src/RootStack';
 
 const getFonts = () => Font.loadAsync({
   'nunito-regular': require('./src/assets/fonts/Nunito-Regular.ttf'),
@@ -13,18 +13,12 @@ const getFonts = () => Font.loadAsync({
 export default function App() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
 
-  if (fontsLoaded) {
-    return (
-      <Login />
-    );
-  } else {
-    return (
-      <AppLoading 
-        startAsync={getFonts} 
-        onFinish={() => setFontsLoaded(true)} 
-        onError={() => {}}
-      />
-    )
-  }
-
+  if (fontsLoaded) return <Root />;
+  return (
+    <AppLoading 
+      startAsync={getFonts} 
+      onFinish={() => setFontsLoaded(true)} 
+      onError={() => {}}
+    />
+  )
 }

@@ -7,3 +7,5 @@ export const LoginSchema = yup.object({
     password: yup.string()
         .required("*Please input password!"),
 });
+
+export type ILogin = yup.InferType<typeof LoginSchema>;

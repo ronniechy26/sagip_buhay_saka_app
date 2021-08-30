@@ -10,17 +10,22 @@ import {
   TextInput
 } from 'react-native';
 import { Formik } from 'formik';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+import { Images, Colors, GlobalStyles } from '../../theme';
+import { LoginSchema, ILogin } from '../../models/LoginModel';
+import { RootStackParamList } from '../../RootStack';
 
 
-import { Images } from '../../theme/Images';
-import { Colors } from '../../theme/Colors';
-import { LoginSchema } from '../../models/LoginModel'
-import { globalStyles } from '../../theme/GlobalStyles';
+export interface ILoginProps {
+  navigation : NativeStackNavigationProp<RootStackParamList, 'Auth'>
+}
 
-export default function App() {
-
-  const handleLogin = (e :any ) =>{
+const App: React.FC<ILoginProps> = (props) => {
+  console.log(props)
+  const handleLogin = (e : ILogin ) =>{
     console.log(e);
+    props.navigation.navigate('Home');
   };
 
   return (
@@ -57,7 +62,7 @@ export default function App() {
                   value={props.values.email}
                   onBlur={props.handleBlur('email')}
                 />
-                <Text style={globalStyles.errorText}>{props.touched.email && props.errors.email}</Text>
+                <Text style={GlobalStyles.errorText}>{props.touched.email && props.errors.email}</Text>
                 <TextInput 
                   style={[
                     styles.textInput, 
@@ -72,7 +77,7 @@ export default function App() {
                   value={props.values.password}
                   onBlur={props.handleBlur('password')} 
                 />
-                <Text style={globalStyles.errorText}>{props.touched.password && props.errors.password}</Text>
+                <Text style={GlobalStyles.errorText}>{props.touched.password && props.errors.password}</Text>
               </View>
               <TouchableOpacity onPress={() => props.handleSubmit()}>
                 <View style={styles.buttonContainer}>
@@ -84,9 +89,10 @@ export default function App() {
         </Formik>
       </View>
     </TouchableWithoutFeedback>
-    
   );
 }
+
+export default App;
 
 const styles = StyleSheet.create({
   container: {

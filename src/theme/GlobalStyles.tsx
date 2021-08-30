@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export const globalStyles = StyleSheet.create({
+const globalStyles = StyleSheet.create({
     errorText: {
         color: 'crimson',
         fontWeight: 'bold',
@@ -9,3 +9,5 @@ export const globalStyles = StyleSheet.create({
         textAlign: 'center',
     },
 });
+
+export default globalStyles;

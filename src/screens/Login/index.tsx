@@ -1,20 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { 
-  Text, 
   View, 
-  Image, 
-  TouchableOpacity, 
   StyleSheet, 
   TouchableWithoutFeedback, 
   Keyboard,
-  TextInput,
-  Platform
 } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import * as Animatable from 'react-native-animatable';
 
 
-import { Images, Colors, GlobalStyles } from '../../theme';
+import { Images } from '../../theme';
 import { ILogin } from '../../models/LoginModel';
 import { RootStackParamList } from '../../types/NavigationTypes';
 import LoginForm from './components/LoginForm';
@@ -34,8 +29,10 @@ const App: React.FC<ILoginProps> = (props) => {
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
-        <Animatable.Image animation="bounceIn" source ={Images.LoginImg}
-          style={{width:"100%", height:"40%"}}
+        <Animatable.Image 
+          animation="bounceIn" 
+          source ={Images.LoginImg}
+          style={{width:"100%", height:"35%"}}
         />
         <Animatable.Text 
           animation="slideInLeft" 

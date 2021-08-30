@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text} from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons'; 
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createDrawerNavigator, DrawerContentComponentProps } from '@react-navigation/drawer';
 
 import DrawerContent from '../drawer/DrawerContent'
 import DrawerData, { IData } from '../drawer/DrawerData';
@@ -26,7 +26,11 @@ const DrawerScreen = () =>{
             //   drawerActiveTintColor: '#fff' 
             // }}
             initialRouteName="Dashboard"
-            drawerContent={(props : any) => <DrawerContent {...props} />}
+            drawerContent={(props : DrawerContentComponentProps) => {
+                return(
+                    <DrawerContent {...props} />
+                )
+            }}
         >
             {
                 DrawerData.map((item : IData, index) => {

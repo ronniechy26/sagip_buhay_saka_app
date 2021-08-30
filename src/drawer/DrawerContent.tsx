@@ -1,63 +1,71 @@
 import  React from 'react';
-import { View, Text, StyleSheet, ImageBackground , Image} from 'react-native';
+import { 
+    View, 
+    Text, 
+    StyleSheet, 
+    ImageBackground , 
+    Image,
+    
+} from 'react-native';
 import {
   DrawerContentScrollView,
   DrawerItemList,
   DrawerItem,
+  DrawerContentComponentProps,
 } from '@react-navigation/drawer';
 import { FontAwesome5 } from '@expo/vector-icons'; 
 import { MaterialIcons } from '@expo/vector-icons'; 
 
 import { Images, Colors } from '../theme';
+  
+type IDrawerContentProps = {} & DrawerContentComponentProps
 
-export default ({state, navigation, descriptors, ...rest} : any) => {
+const DrawerContent : React.FC<IDrawerContentProps> =  ({...rest}) => {
     return (
-        <DrawerContentScrollView {...rest}>
-            <View>
-                <ImageBackground
-                    source={Images.DrawerImg}
-                    style={{ width: undefined, padding: 16, paddingTop: 48 }}
-                    blurRadius={5}
-                >
-                    <Image source={Images.ProfileImg} style={styles.profile} />
-                    <Text style={styles.name}>Ronnie Chy</Text>
+        <View style={styles.container}>
+            <DrawerContentScrollView {...rest}>
+                <View>
+                    <ImageBackground
+                        source={Images.DrawerImg}
+                        style={{ width: undefined, padding: 16, paddingTop: 48 }}
+                        blurRadius={5}
+                    >
+                        <Image source={Images.ProfileImg} style={styles.profile} />
+                        <Text style={styles.name}>Ronnie Chy</Text>
 
-                    <View style={{ flexDirection: "row", justifyContent : 'space-between', marginRight : 20}}>
-                        <View style={{ flexDirection: "row" }}>
-                            <Text style={styles.followers}>734 Recipients</Text>
-                            <FontAwesome5 name="users" size={16} color="rgba(255, 255, 255, 0.8)" />
+                        <View style={{ flexDirection: "row", justifyContent : 'space-between', marginRight : 20}}>
+                            <View style={{ flexDirection: "row" }}>
+                                <Text style={styles.followers}>734 Recipients</Text>
+                                <FontAwesome5 name="users" size={16} color="rgba(255, 255, 255, 0.8)" />
+                            </View>
+                            <View style={{ flexDirection: "row" }}>
+                                <Text style={styles.followers}>123 Credits</Text>
+                                <FontAwesome5 name="bitcoin" size={16} color="rgba(255, 255, 255, 0.8)" />
+                            </View>
                         </View>
-                        <View style={{ flexDirection: "row" }}>
-                            <Text style={styles.followers}>123 Credits</Text>
-                            <FontAwesome5 name="bitcoin" size={16} color="rgba(255, 255, 255, 0.8)" />
-                        </View>
+                    </ImageBackground>
+
+                    <View style={styles.container}>
+                        <DrawerItemList {...rest} />
                     </View>
-                </ImageBackground>
-
-                <View style={styles.container}>
-                    <DrawerItemList 
-                        {...rest} 
-                        state={state} 
-                        navigation={navigation} 
-                        descriptors={descriptors}
-                    />
-                    <DrawerItem
-                        onPress={() => {}}
-                        label="Logout"
-                        icon={() => (
-                            <MaterialIcons name="logout" color={Colors.primary} size={20} />
-                        )}
-                    />
                 </View>
-            </View>
-        </DrawerContentScrollView>
+            </DrawerContentScrollView>
+            <DrawerItem
+                onPress={() => {}}
+                label="Logout"
+                icon={() => (
+                    <MaterialIcons name="logout" color={Colors.primary} size={20} />
+                )}
+            />
+        </View>
     )
 }
+
+export default DrawerContent;
 
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      justifyContent : 'flex-end'
     },
     profile: {
         width: 80,

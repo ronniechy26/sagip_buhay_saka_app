@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import AuthStackScreen  from "./stacks/AuthStackScreen";
 import DrawerScreen from './stacks/DrawerScreen';
-
+import { RootStackParamList } from './types/NavigationTypes';
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
@@ -34,7 +34,3 @@ export default () => {
     )
 }
 
-export type RootStackParamList = {
-    Home: undefined;
-    Auth: undefined;
-};

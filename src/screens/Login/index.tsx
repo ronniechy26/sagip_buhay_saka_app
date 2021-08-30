@@ -14,7 +14,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import { Images, Colors, GlobalStyles } from '../../theme';
 import { LoginSchema, ILogin } from '../../models/LoginModel';
-import { RootStackParamList } from '../../RootStack';
+import { RootStackParamList } from '../../types/NavigationTypes';
 
 
 export interface ILoginProps {

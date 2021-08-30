@@ -6,9 +6,9 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import DrawerContent from '../drawer/DrawerContent'
 import DrawerData, { IData } from '../drawer/DrawerData';
 import { Colors } from '../theme';
+// import { DrawerParamList } from '../types/NavigationTypes';
 
 const Drawer = createDrawerNavigator();
-
 function Feed() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>

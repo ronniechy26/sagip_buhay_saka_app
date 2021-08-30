@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
-
+import { Provider as PaperProvider } from 'react-native-paper';
 import Root from './src/RootStack';
 
 const getFonts = () => Font.loadAsync({
@@ -13,7 +13,13 @@ const getFonts = () => Font.loadAsync({
 export default function App() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
 
-  if (fontsLoaded) return <Root />;
+  if (fontsLoaded) {
+    return (
+      <PaperProvider>
+        <Root />
+      </PaperProvider>
+    );
+  }
   return (
     <AppLoading 
       startAsync={getFonts} 

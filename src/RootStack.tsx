@@ -39,12 +39,10 @@ const RootStackScreen : React.FC<IProps> = (props) => {
     }, [props.data, token]);
 
     useEffect(() =>{
-        if(props.data === undefined && token) {
-            if(userId) {
-              props.fetch_user(userId as string);
-            }
+        if(!props.data && token && userId) {
+            props.fetch_user(userId);
         }
-    }, [props.fetch_user, props.data , token]);
+    }, [props.fetch_user, props.data , token, userId]);
 
     useEffect(() => {
         if(props.data && userId && token){
@@ -89,7 +87,7 @@ const mapStateToProps = (state: IState) => ({
 const mapDispatchToProps = (dispatch: Dispatch) =>
     bindActionCreators(
         {
-        fetch_user : asyncActions.fetch_user
+            fetch_user : asyncActions.fetch_user
         },
     dispatch
 );

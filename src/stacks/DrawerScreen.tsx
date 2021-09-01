@@ -7,7 +7,7 @@ import { Dispatch, bindActionCreators } from 'redux';
 
 import DrawerContent from '../drawer/DrawerContent'
 import DrawerData, { IData } from '../drawer/DrawerData';
-import { Colors } from '../theme';
+import { Colors, Fonts } from '../theme';
 import { IState } from '../reducers/rootReducer';
 import { syncActions } from '../reducers/UserReducer'
 import { removeDatas } from '../libraries/asyncStorage';
@@ -29,8 +29,8 @@ const DrawerScreen: React.FC<IProps> = ({
     logout
 }) =>{
 
-    const logoutAction = () => {
-        removeDatas([
+    const logoutAction = async () => {
+        await removeDatas([
             process.env.STORAGE_KEY_AUTH!,
             process.env.STORAGE_KEY_USER!
         ]);
@@ -40,10 +40,14 @@ const DrawerScreen: React.FC<IProps> = ({
     return (
         <Drawer.Navigator
             useLegacyImplementation
-            // screenOptions={{ 
-            //   drawerActiveBackgroundColor: '#98da75', 
-            //   drawerActiveTintColor: '#fff' 
-            // }}
+            screenOptions={{ 
+                // drawerActiveBackgroundColor: Colors.tertiary, 
+                // drawerActiveTintColor: Colors.white,
+                drawerInactiveTintColor : Colors.darkGray,
+                drawerLabelStyle : {
+                    fontFamily : Fonts.BOLD, 
+                }
+            }}
             initialRouteName="Dashboard"
             drawerContent={(props : DrawerContentComponentProps) => {
                 return(

@@ -16,7 +16,7 @@ import {
 import { FontAwesome5 } from '@expo/vector-icons'; 
 import { MaterialIcons } from '@expo/vector-icons'; 
 
-import { Images, Colors } from '../theme';
+import { Images, Colors, Fonts } from '../theme';
   
 type IDrawerContentProps = {
     logout : () => void;
@@ -57,6 +57,10 @@ const DrawerContent : React.FC<IDrawerContentProps> =  ({logout, ...rest}) => {
                     logout();
                 }}
                 label="Logout"
+                labelStyle={{
+                    fontFamily : Fonts.BOLD,
+                    color : Colors.darkGray
+                }}
                 icon={() => (
                     <MaterialIcons name="logout" color={Colors.primary} size={20} />
                 )}
@@ -82,11 +86,13 @@ const styles = StyleSheet.create({
         color: "#FFF",
         fontSize: 20,
         fontWeight: "800",
-        marginVertical: 8
+        marginVertical: 8,
+        fontFamily : Fonts.BOLD
     },
     followers: {
         color: "rgba(255, 255, 255, 0.8)",
         fontSize: 13,
-        marginRight: 4
+        marginRight: 4,
+        fontFamily : Fonts.SEMI_BOLD
     }
   });

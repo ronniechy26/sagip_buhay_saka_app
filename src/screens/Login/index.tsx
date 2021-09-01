@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { 
   View, 
   StyleSheet, 
@@ -9,8 +9,9 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import * as Animatable from 'react-native-animatable';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
+import Spinner from 'react-native-loading-spinner-overlay';
 
-import { Fonts, Images } from '../../theme';
+import { Colors, Fonts, Images } from '../../theme';
 import { ILogin } from '../../models/LoginModel';
 import { RootStackParamList } from '../../types/NavigationTypes';
 import LoginForm from './components/LoginForm';
@@ -28,42 +29,51 @@ type IProps = ReturnType<typeof mapStateToProps> &
 const App: React.FC<IProps> = (props) => {
   const loading_login = (props.status['USER_LOGIN'] ? props.status['USER_LOGIN'].fetching : false);
  
-  const handleLogin = (data : ILogin ) =>{
-    props.login({
-      username : data.email,
-      password : data.password
-    });
-  };
+  const handleLogin = useCallback(
+    (data : ILogin) => {
+      props.login({
+        username : data.email,
+        password : data.password
+      });
+    },
+    [props.login],
+  );
 
   return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View style={styles.container}>
-        <Animatable.Image 
-          animation="bounceIn" 
-          source ={Images.LoginImg}
-          style={{width:"100%", height:"35%"}}
-        />
-        <Animatable.Text 
-          animation="slideInLeft" 
-          style={styles.title} 
-        >
-          Sagip Buhay Saka
-        </Animatable.Text>
+    <>
+      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+        <View style={styles.container}>
+          <Animatable.Image 
+            animation="bounceIn" 
+            source ={Images.LoginImg}
+            style={{width:"100%", height:"35%"}}
+          />
+          <Animatable.Text 
+            animation="slideInLeft" 
+            style={styles.title} 
+          >
+            Sagip Buhay Saka
+          </Animatable.Text>
 
-        <Animatable.Text 
-          animation="slideInRight"
-          style={styles.description}
-        >
-          Sagip Buhay at Saka is a short messaging service (sms) 
-          designed to communicate climate-based warnings to farmers, 
-          fishers and other community members.     
-        </Animatable.Text>
+          <Animatable.Text 
+            animation="slideInRight"
+            style={styles.description}
+          >
+            Sagip Buhay at Saka is a short messaging service (sms) 
+            designed to communicate climate-based warnings to farmers, 
+            fishers and other community members.     
+          </Animatable.Text>
 
-        <LoginForm
-          handleLogin={handleLogin}
-        />
-      </View>
-    </TouchableWithoutFeedback>
+          <LoginForm
+            handleLogin={handleLogin}
+          />
+        </View>
+      </TouchableWithoutFeedback>
+      <Spinner
+        visible={loading_login}
+        color={Colors.primary}
+      />
+    </>
   );
 }
 
@@ -99,5 +109,5 @@ const styles = StyleSheet.create({
     textAlign:'center',
     marginTop:5,
     opacity:0.4
-  },
+  }
 });

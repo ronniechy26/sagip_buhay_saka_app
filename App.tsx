@@ -4,6 +4,7 @@ import AppLoading from 'expo-app-loading';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { Provider as StoreProvider } from 'react-redux';
 import FlashMessage from "react-native-flash-message";
+import { useAssets } from 'expo-asset';
 
 import Root from './src/RootStack';
 import Store from './src/store/store';
@@ -16,8 +17,13 @@ const getFonts = () => Font.loadAsync({
 
 export default function App() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
+  const [assets] = useAssets([
+    require('./src/assets/images/image.jpg'), 
+    require('./src/assets/images/ImgBg.jpg'), 
+    require('./src/assets/images/profile.png'), 
+  ]);
 
-  if (fontsLoaded) {
+  if (fontsLoaded && assets) {
     return (
       <StoreProvider store={Store}>
         <PaperProvider>

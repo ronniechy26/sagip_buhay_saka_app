@@ -20,9 +20,8 @@ interface ILoginFormProps {
 }
 
 const LoginForm : React.FC<ILoginFormProps> = ({
-    handleLogin
+    handleLogin,
 }) =>{
-
     const [showPassword, setShowPassword] = useState(false);
 
     return(

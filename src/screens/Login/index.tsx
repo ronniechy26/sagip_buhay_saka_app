@@ -16,6 +16,7 @@ import { RootStackParamList } from '../../types/NavigationTypes';
 import LoginForm from './components/LoginForm';
 import { IState } from '../../reducers/rootReducer';
 import { asyncActions } from '../../reducers/UserReducer';
+import { getUserStatus } from '../../selectors/UserSelectors';
 
 export type ILoginProps = {
   navigation : NativeStackNavigationProp<RootStackParamList, 'Auth'>
@@ -25,7 +26,8 @@ type IProps = ReturnType<typeof mapStateToProps> &
     ReturnType<typeof mapDispatchToProps> & ILoginProps;
 
 const App: React.FC<IProps> = (props) => {
-
+  const loading_login = (props.status['USER_LOGIN'] ? props.status['USER_LOGIN'].fetching : false);
+ 
   const handleLogin = (data : ILogin ) =>{
     props.login({
       username : data.email,
@@ -67,6 +69,7 @@ const App: React.FC<IProps> = (props) => {
 
 const mapStateToProps = (state: IState) => ({
   data: state.UserReducer.data,
+  status : getUserStatus(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) =>

@@ -12,7 +12,8 @@ const TokenMiddleware = (store : any) => (next :any) => (action :any) => {
         store.dispatch(syncActions.logout());
         showMessage({
             icon : 'danger',
-            message: 'Token has expired',
+            message: 'Token has expired!',
+            description : 'Please Log in again!',
             type: "danger",
         });
     }

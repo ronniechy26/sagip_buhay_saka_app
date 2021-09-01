@@ -22,11 +22,6 @@ const RootStackScreen : React.FC<IProps> = (props) => {
     const [userId, setUserId] = useState<string|null>('');
     const [isSignedIn, setIsSignedIn] = useState(false);
 
-    console.log('token', token);
-    console.log('userId', userId);
-    console.log('isSignedIn', isSignedIn);
-    console.log('props.data', props.data);
-
     useEffect(() => {
         async function load(){
             const tempToken = await getData(process.env.STORAGE_KEY_AUTH!);

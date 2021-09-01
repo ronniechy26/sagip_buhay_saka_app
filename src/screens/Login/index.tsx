@@ -10,7 +10,7 @@ import * as Animatable from 'react-native-animatable';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 
-import { Images } from '../../theme';
+import { Fonts, Images } from '../../theme';
 import { ILogin } from '../../models/LoginModel';
 import { RootStackParamList } from '../../types/NavigationTypes';
 import LoginForm from './components/LoginForm';
@@ -87,11 +87,11 @@ const styles = StyleSheet.create({
   },
   title : {
     fontSize:30,
-    fontFamily:"nunito-semibold",
+    fontFamily:Fonts.SEMI_BOLD,
     alignSelf:"center",
   },
   description : {
-    fontFamily:"nunito-semibold",
+    fontFamily:Fonts.SEMI_BOLD,
     marginHorizontal:55,
     textAlign:'center',
     marginTop:5,

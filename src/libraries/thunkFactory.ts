@@ -2,6 +2,7 @@ import { ThunkAction } from 'redux-thunk';
 import { TYPE_FETCHING, TYPE_FETCHED, TYPE_ERROR } from '../constants';
 import { IState, IAsyncAction, IReturnPromise } from '../reducers/RootReducer';
 import { get } from 'lodash';
+import { showMessage } from 'react-native-flash-message';
 
 const thunkCreator = <C extends string, T>(
     actionType: C,
@@ -33,9 +34,11 @@ const thunkCreator = <C extends string, T>(
             });
             // Notification handler
             if (!meta || (meta && meta.error !== false)) {
-                // notification.error({
-                //     message: get(e, 'response.data.messages',e.message),
-                // });
+                showMessage({
+                    message: get(e, 'response.data.messages', e.message),
+                    type: "danger",
+                    icon : 'danger',
+                });
             }
 
             return { error: e as Error };

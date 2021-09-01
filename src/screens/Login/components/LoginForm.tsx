@@ -12,7 +12,7 @@ import * as Animatable from 'react-native-animatable';
 import { FontAwesome, Feather } from '@expo/vector-icons'; 
 
 
-import { Colors, GlobalStyles } from '../../../theme';
+import { Colors, Fonts, GlobalStyles } from '../../../theme';
 import { LoginSchema, ILogin } from '../../../models/LoginModel';
 
 interface ILoginFormProps {
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     },
     buttonText : {
       color:Colors.white,
-      fontFamily:"nunito-bold",
+      fontFamily: Fonts.BOLD,
       fontSize : 18
     },
     inputContainer : {
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
       marginBottom : 5,
     },
     textInput : {
-      fontFamily : "nunito-regular",
+      fontFamily : Fonts.REGULAR,
       padding : 8,
       fontSize : 14,
       flex: 1,

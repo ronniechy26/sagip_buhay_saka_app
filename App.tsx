@@ -3,6 +3,7 @@ import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { Provider as StoreProvider } from 'react-redux';
+import FlashMessage from "react-native-flash-message";
 
 import Root from './src/RootStack';
 import Store from './src/store/store';
@@ -21,6 +22,7 @@ export default function App() {
       <StoreProvider store={Store}>
         <PaperProvider>
           <Root />
+          <FlashMessage position="top"/>
         </PaperProvider>
       </StoreProvider>
     );

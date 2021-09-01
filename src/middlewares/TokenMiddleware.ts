@@ -1,3 +1,4 @@
+import { showMessage } from 'react-native-flash-message';
 import { TYPE_ERROR } from '../constants';
 import { syncActions } from '../reducers/UserReducer';
 
@@ -9,10 +10,11 @@ const TokenMiddleware = (store : any) => (next :any) => (action :any) => {
             action.payload.message === 'Token has expired')
     ) {
         store.dispatch(syncActions.logout());
-        // notification.error({
-        //     message : 'Token has expired',
-        //     description : 'Please Log in again'
-        // })
+        showMessage({
+            icon : 'danger',
+            message: 'Token has expired',
+            type: "danger",
+        });
     }
 
     return next(action);

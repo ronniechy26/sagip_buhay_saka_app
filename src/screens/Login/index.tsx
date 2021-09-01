@@ -7,23 +7,30 @@ import {
 } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import * as Animatable from 'react-native-animatable';
-
+import { connect } from 'react-redux';
+import { Dispatch, bindActionCreators } from 'redux';
 
 import { Images } from '../../theme';
 import { ILogin } from '../../models/LoginModel';
 import { RootStackParamList } from '../../types/NavigationTypes';
 import LoginForm from './components/LoginForm';
+import { IState } from '../../reducers/rootReducer';
+import { asyncActions } from '../../reducers/UserReducer';
 
-export interface ILoginProps {
+export type ILoginProps = {
   navigation : NativeStackNavigationProp<RootStackParamList, 'Auth'>
 }
 
-const App: React.FC<ILoginProps> = (props) => {
+type IProps = ReturnType<typeof mapStateToProps> &
+    ReturnType<typeof mapDispatchToProps> & ILoginProps;
 
-  console.log(props)
-  const handleLogin = (e : ILogin ) =>{
-    console.log(e);
-    props.navigation.navigate('Home');
+const App: React.FC<IProps> = (props) => {
+
+  const handleLogin = (data : ILogin ) =>{
+    props.login({
+      username : data.email,
+      password : data.password
+    });
   };
 
   return (
@@ -58,7 +65,20 @@ const App: React.FC<ILoginProps> = (props) => {
   );
 }
 
-export default App;
+const mapStateToProps = (state: IState) => ({
+  data: state.UserReducer.data,
+});
+
+const mapDispatchToProps = (dispatch: Dispatch) =>
+  bindActionCreators(
+  {
+    login : asyncActions.login,
+    fetch_user : asyncActions.fetch_user
+  },
+  dispatch
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 const styles = StyleSheet.create({
   container: {

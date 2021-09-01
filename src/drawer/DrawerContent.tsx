@@ -18,9 +18,11 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 import { Images, Colors } from '../theme';
   
-type IDrawerContentProps = {} & DrawerContentComponentProps
+type IDrawerContentProps = {
+    logout : () => void;
+} & DrawerContentComponentProps
 
-const DrawerContent : React.FC<IDrawerContentProps> =  ({...rest}) => {
+const DrawerContent : React.FC<IDrawerContentProps> =  ({logout, ...rest}) => {
     return (
         <View style={styles.container}>
             <DrawerContentScrollView {...rest}>
@@ -51,7 +53,9 @@ const DrawerContent : React.FC<IDrawerContentProps> =  ({...rest}) => {
                 </View>
             </DrawerContentScrollView>
             <DrawerItem
-                onPress={() => {}}
+                onPress={() => {
+                    logout();
+                }}
                 label="Logout"
                 icon={() => (
                     <MaterialIcons name="logout" color={Colors.primary} size={20} />

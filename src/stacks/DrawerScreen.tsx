@@ -2,10 +2,15 @@ import React from 'react';
 import { View, Text} from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons'; 
 import { createDrawerNavigator, DrawerContentComponentProps } from '@react-navigation/drawer';
+import { connect } from 'react-redux';
+import { Dispatch, bindActionCreators } from 'redux';
 
 import DrawerContent from '../drawer/DrawerContent'
 import DrawerData, { IData } from '../drawer/DrawerData';
 import { Colors } from '../theme';
+import { IState } from '../reducers/rootReducer';
+import { syncActions } from '../reducers/UserReducer'
+import { removeDatas } from '../libraries/asyncStorage';
 // import { DrawerParamList } from '../types/NavigationTypes';
 
 const Drawer = createDrawerNavigator();
@@ -16,8 +21,22 @@ function Feed() {
       </View>
     );
 }
+
+type IProps = ReturnType<typeof mapStateToProps> &
+    ReturnType<typeof mapDispatchToProps> ;
   
-const DrawerScreen = () =>{
+const DrawerScreen: React.FC<IProps> = ({
+    logout
+}) =>{
+
+    const logoutAction = () => {
+        removeDatas([
+            process.env.STORAGE_KEY_AUTH!,
+            process.env.STORAGE_KEY_USER!
+        ]);
+        logout();
+    }
+
     return (
         <Drawer.Navigator
             useLegacyImplementation
@@ -28,7 +47,10 @@ const DrawerScreen = () =>{
             initialRouteName="Dashboard"
             drawerContent={(props : DrawerContentComponentProps) => {
                 return(
-                    <DrawerContent {...props} />
+                    <DrawerContent 
+                        {...props} 
+                        logout={logoutAction}
+                     />
                 )
             }}
         >
@@ -58,4 +80,16 @@ const DrawerScreen = () =>{
    );
 }
 
-export default DrawerScreen;
+const mapStateToProps = (state: IState) => ({
+    
+});
+  
+const mapDispatchToProps = (dispatch: Dispatch) =>
+    bindActionCreators(
+        {
+            logout : syncActions.logout
+        },
+    dispatch
+);
+  
+export default connect(mapStateToProps, mapDispatchToProps)(DrawerScreen);

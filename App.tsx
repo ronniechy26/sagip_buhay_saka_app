@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import { Provider as PaperProvider } from 'react-native-paper';
+import { Provider as StoreProvider } from 'react-redux';
+
 import Root from './src/RootStack';
+import Store from './src/store/store';
 
 const getFonts = () => Font.loadAsync({
   'nunito-regular': require('./src/assets/fonts/Nunito-Regular.ttf'),
@@ -15,9 +18,11 @@ export default function App() {
 
   if (fontsLoaded) {
     return (
-      <PaperProvider>
-        <Root />
-      </PaperProvider>
+      <StoreProvider store={Store}>
+        <PaperProvider>
+          <Root />
+        </PaperProvider>
+      </StoreProvider>
     );
   }
   return (

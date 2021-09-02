@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Sagip App",
+    "name": "Sagip Buhay Saka App",
     "slug": "sagip_buhay_saka_app",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -20,6 +20,7 @@
       "supportsTablet": true
     },
     "android": {
+      "package" : "com.sagipbuhaysaka.sagipbuhaysakaapp",
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
@@ -27,6 +28,8 @@
     },
     "web": {
       "favicon": "./src/assets/favicon.png"
-    }
+    },
+    "description": "",
+    "githubUrl": "https://github.com/ronniechy26/sagip_buhay_saka_app"
   }
 }

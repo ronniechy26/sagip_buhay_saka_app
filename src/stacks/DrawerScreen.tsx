@@ -14,13 +14,6 @@ import { removeDatas } from '../libraries/asyncStorage';
 // import { DrawerParamList } from '../types/NavigationTypes';
 
 const Drawer = createDrawerNavigator();
-function Feed() {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Feed Screen</Text>
-      </View>
-    );
-}
 
 type IProps = ReturnType<typeof mapStateToProps> &
     ReturnType<typeof mapDispatchToProps> ;
@@ -64,7 +57,7 @@ const DrawerScreen: React.FC<IProps> = ({
                         <Drawer.Screen 
                             key={index}
                             name={item.name}
-                            component={Feed}
+                            component={item.component}
                             options={
                             {
                                 drawerIcon : () => (

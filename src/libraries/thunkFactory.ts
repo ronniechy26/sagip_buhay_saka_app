@@ -3,6 +3,7 @@ import { TYPE_FETCHING, TYPE_FETCHED, TYPE_ERROR } from '../constants';
 import { IState, IAsyncAction, IReturnPromise } from '../reducers/RootReducer';
 import { get } from 'lodash';
 import { showMessage } from 'react-native-flash-message';
+import { showMessageStyle } from '../theme';
 
 const thunkCreator = <C extends string, T>(
     actionType: C,
@@ -34,13 +35,16 @@ const thunkCreator = <C extends string, T>(
             });
             // Notification handler
             if (!meta || (meta && meta.error !== false)) {
+                const serverError = e.message === 'Request failed with status code 500';
                 showMessage({
                     message: get(e, 'response.data.messages', e.message),
+                    description : serverError ? 'Network Error!' : '',
                     type: "danger",
                     icon : 'danger',
+                    ...showMessageStyle
                 });
             }
-
+            
             return { error: e as Error };
         }
     };

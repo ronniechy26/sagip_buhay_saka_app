@@ -1,6 +1,7 @@
 import { showMessage } from 'react-native-flash-message';
 import { TYPE_ERROR } from '../constants';
 import { syncActions } from '../reducers/UserReducer';
+import { showMessageStyle } from '../theme';
 
 const TokenMiddleware = (store : any) => (next :any) => (action :any) => {
     if (
@@ -15,6 +16,7 @@ const TokenMiddleware = (store : any) => (next :any) => (action :any) => {
             message: 'Token has expired!',
             description : 'Please Log in again!',
             type: "danger",
+            ...showMessageStyle
         });
     }
 

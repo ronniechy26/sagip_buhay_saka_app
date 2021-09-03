@@ -2,13 +2,19 @@ import React from 'react';
 import { View, StyleSheet  } from 'react-native';
 
 
-import { Colors, Images,  } from '../../../theme';
-import CardIcon from '../../../components/CardIcon';
-import Legend from '../../../components/Legend';
+import { Colors, Images,  } from '../../../../theme';
+import CardIcon from '../../../../components/CardIcon';
+import Legend from '../../../../components/Legend';
 import RainfallChart from './RainfallChart';
+import { IDashboardRainfall } from '../../../../models/DashboardModel';
 
 
-const Rainfall : React.FC = () => {
+interface IProps  {
+    data : IDashboardRainfall[];
+    status : any
+}
+
+const Rainfall : React.FC<IProps> = (props) => {
     return (
         <View style={[
             styles.Card, 
@@ -22,7 +28,7 @@ const Rainfall : React.FC = () => {
                 />
             </View>
             <View style={{marginTop : -35}}>
-                <RainfallChart/>
+                <RainfallChart data={props.data}/>
                 <Legend/>
             </View>
         </View>

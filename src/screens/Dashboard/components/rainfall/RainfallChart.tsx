@@ -6,15 +6,21 @@ import {
     VictoryScatter, 
     VictoryLine, 
     VictoryLabel,
-    VictoryLegend,
     VictoryGroup
 } from 'victory-native';
 
-import { MONTHS } from '../../../constants';
-import { VictoryTheme, Colors } from '../../../theme';
+import { MONTHS } from '../../../../constants';
+import { IDashboardRainfall } from '../../../../models/DashboardModel';
+import { VictoryTheme, Colors } from '../../../../theme';
 const { width } = Dimensions.get("window");
 
-const RainfallChart : React.FC = () => {
+type IProps = {
+    data : IDashboardRainfall[]
+}
+
+const RainfallChart : React.FC<IProps> = (props) => {
+
+    console.log(props)
     return (
         <VictoryChart
             theme={VictoryTheme}

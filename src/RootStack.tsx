@@ -82,7 +82,7 @@ const RootStackScreen : React.FC<IProps> = (props) => {
   
 const mapStateToProps = (state: IState) => ({
     data: state.UserReducer.data,
-  });
+});
   
 const mapDispatchToProps = (dispatch: Dispatch) =>
     bindActionCreators(

@@ -13,7 +13,7 @@ import { UserReducer, IUserState } from '../reducers/UserReducer';
 // import { FeedbackReducer, IFeedbackState } from '../ducks/FeedbackDucks';
 // import { LaNinaRainfallReducer, ILaNinaRainfallState} from '../ducks/LaNinaRainfallDucks';
 // import { ElNinoRainfallReducer, IElNinoRainfallState} from '../ducks/ElNinoRainfallDucks';
-// import { DashboardReducer, IDashboardState} from '../ducks/DashboardDucks';
+import { DashboardReducer, IDashboardState} from '../reducers/DashboardReducer';
 // import { ClimateDataReducer, IClimateDataState} from '../ducks/ClimateDataDucks'
 
 export interface IReducerWrapper {
@@ -31,7 +31,7 @@ export interface IReducerWrapper {
     // (reducer: typeof FeedbackReducer, defaultState: IFeedbackState): typeof FeedbackReducer;
     // (reducer: typeof LaNinaRainfallReducer, defaultState: ILaNinaRainfallState): typeof LaNinaRainfallReducer;
     // (reducer: typeof ElNinoRainfallReducer, defaultState: IElNinoRainfallState): typeof ElNinoRainfallReducer;
-    // (reducer: typeof DashboardReducer, defaultState: IDashboardState): typeof DashboardReducer;
+    (reducer: typeof DashboardReducer, defaultState: IDashboardState): typeof DashboardReducer;
     // (reducer: typeof ClimateDataReducer, defaultState: IClimateDataState): typeof ClimateDataReducer;
 }
 

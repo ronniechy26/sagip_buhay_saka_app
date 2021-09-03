@@ -28,6 +28,7 @@ type IProps = ReturnType<typeof mapStateToProps> &
 
 const App: React.FC<IProps> = (props) => {
   const loading_login = (props.status['USER_LOGIN'] ? props.status['USER_LOGIN'].fetching : false);
+  const loading_fetch_user = (props.status['USER_FETCH_DATA'] ? props.status['USER_FETCH_DATA'].fetching : false);
  
   const handleLogin = useCallback(
     (data : ILogin) => {
@@ -70,7 +71,7 @@ const App: React.FC<IProps> = (props) => {
         </View>
       </TouchableWithoutFeedback>
       <Spinner
-        visible={loading_login}
+        visible={loading_login || loading_fetch_user}
         color={Colors.primary}
       />
     </>

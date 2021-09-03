@@ -10,7 +10,8 @@ import {
     VictoryGroup
 } from 'victory-native';
 
-import { Colors, MONTHS, VictoryTheme } from '../../../theme';
+import { MONTHS } from '../../../constants';
+import { VictoryTheme, Colors } from '../../../theme';
 const { width } = Dimensions.get("window");
 
 const RainfallChart : React.FC = () => {

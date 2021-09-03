@@ -16,7 +16,9 @@ type IProps = ReturnType<typeof mapStateToProps> &
 const Dashboard : React.FC<IProps> = (props) => {
 
     useEffect(() => {
-        props.get_dashboard_rainfall(parseInt(props.user?.id ?? '1'));
+        props.get_dashboard_rainfall(
+            parseInt(props.user?.id ?? '1')
+        );
     }, [
         props.get_dashboard_rainfall, 
         props.user

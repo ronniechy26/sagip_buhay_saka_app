@@ -9,6 +9,10 @@ import { useAssets } from 'expo-asset';
 import Root from './src/RootStack';
 import Store from './src/store/store';
 
+if(__DEV__) {
+  import('./ReactotronConfig').then(() => console.log('Reactotron Configured'))
+}
+
 const getFonts = () => Font.loadAsync({
   'nunito-regular': require('./src/assets/fonts/Nunito-Regular.ttf'),
   'nunito-bold': require('./src/assets/fonts/Nunito-Bold.ttf'),

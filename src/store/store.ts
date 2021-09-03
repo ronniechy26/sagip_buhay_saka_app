@@ -12,7 +12,7 @@ const store = createStore(
         applyMiddleware(
             ...[
                 thunk,
-                createLogger({ predicate: () => process.env.NODE_ENV !== 'production' }), 
+                // createLogger({ predicate: () => process.env.NODE_ENV !== 'production' }), 
                 TokenMiddleware
             ]
         )

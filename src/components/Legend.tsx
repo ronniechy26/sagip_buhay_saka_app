@@ -8,29 +8,29 @@ const Legend : React.FC = () => {
         <View style={styles.containter}>
             <View style={styles.upperContainer}>
                <View style={styles.flexRow}>
-                    <Badge size={12} style={{backgroundColor : "rgb(152, 208, 255)" }} />
+                    <Badge size={12} style={{backgroundColor : Colors.normal_data}} />
                     <Text style={styles.text}> Normal </Text>
                </View>
                <View style={styles.flexRow}>
-                    <Badge size={12} style={{backgroundColor : "rgb(233, 68, 82)" }} />
+                    <Badge size={12} style={{backgroundColor : Colors.el_nino }} />
                     <Text style={styles.text}> El Nino </Text>
                </View>
                <View style={styles.flexRow}>
-                    <Badge size={12} style={{backgroundColor : "rgb(79, 108, 206)" }} />
+                    <Badge size={12} style={{backgroundColor : Colors.la_nina }} />
                     <Text style={styles.text}> La Nina </Text>
                </View>
                <View style={{ flexDirection : 'row'}}>
-                    <Badge size={12} style={{backgroundColor : "rgb(245, 73, 6)" }} />
+                    <Badge size={12} style={{backgroundColor : Colors.forecast }} />
                     <Text style={styles.text}> Forecast </Text>
                </View>
             </View>
             <View style={styles.lowerContainer}>
                <View style={styles.flexRow}>
-                    <Badge size={12} style={{backgroundColor : "rgb(80, 233, 93)" }} />
+                    <Badge size={12} style={{backgroundColor : Colors.actual_year }} />
                     <Text style={styles.text}> Actual Year </Text>
                </View>
                <View style={{flexDirection : 'row', marginRight : 10}}>
-                    <Badge size={12} style={{backgroundColor : "rgb(129, 137, 143)" }} />
+                    <Badge size={12} style={{backgroundColor : Colors.projection_5050 }} />
                     <Text style={styles.text}> Projection 2050 </Text>
                </View>
             </View>

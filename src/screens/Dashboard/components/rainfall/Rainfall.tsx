@@ -1,13 +1,12 @@
-import React from 'react';
-import { View, StyleSheet  } from 'react-native';
-
+import React, { useRef } from 'react';
+import { View, StyleSheet , useWindowDimensions, Animated } from 'react-native';
 
 import { Colors, Images,  } from '../../../../theme';
-import CardIcon from '../../../../components/CardIcon';
-import Legend from '../../../../components/Legend';
+import {CardIcon, Legend, ScrollIndicator} from '../../../../components';
 import RainfallChart from './RainfallChart';
 import { IDashboardRainfall } from '../../../../models/DashboardModel';
-
+import { chartData } from '../../../../constants/ChartData';
+import { getDashboardData } from '../../../../selectors/DashboardSelectors';
 
 interface IProps  {
     data : IDashboardRainfall[];
@@ -15,6 +14,9 @@ interface IProps  {
 }
 
 const Rainfall : React.FC<IProps> = (props) => {
+    const scrollX = new Animated.Value(0);
+    const { width } = useWindowDimensions();
+
     return (
         <View style={[
             styles.Card, 
@@ -27,10 +29,46 @@ const Rainfall : React.FC<IProps> = (props) => {
                     title="Rainfall"
                 />
             </View>
-            <View style={{marginTop : -35}}>
-                <RainfallChart data={props.data}/>
-                <Legend/>
-            </View>
+            <Animated.ScrollView
+                horizontal
+                pagingEnabled
+                scrollEventThrottle={60}
+                snapToAlignment="center"
+                snapToInterval={width - 5}
+                showsHorizontalScrollIndicator={false}
+                decelerationRate={0}
+                onScroll={Animated.event([
+                    {
+                        nativeEvent : {contentOffset : {x : scrollX}}
+                    }
+                ], { useNativeDriver : false})}
+            >
+                {
+                    chartData.map((item, index) =>{
+                        return(
+                            <View 
+                                key={`chart-${index}`}
+                                style={{
+                                    marginLeft : index === 0 ? 8 : 0
+                                }}
+                            >
+                                <View style={{marginTop : -35}}>
+                                    <RainfallChart 
+                                        color={item.color}
+                                        data={ getDashboardData(props.data, item.key)}
+                                    />
+                                </View>
+                            </View>
+                        )
+                    })
+                }
+            </Animated.ScrollView>
+            <Legend/>
+            <ScrollIndicator 
+                width={width} 
+                data={chartData}
+                scrollX={scrollX}
+            />
         </View>
     )
 }

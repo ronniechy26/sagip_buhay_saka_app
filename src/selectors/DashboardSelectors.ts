@@ -4,7 +4,7 @@ import { IDashboardRainfall } from "../models/DashboardModel";
 
 export const getDashboardStatus = ( state: IState): any => state.DashboardReducer.status;
 
-export const ModifyData = (param :  Array<IDashboardRainfall>  = []) =>{
+export const modifyData = (param :  Array<IDashboardRainfall>  = []) =>{
     const normal = param.find(x => x.data_input === 'Normal Data');
     const el_nino = param.find(x => x.data_input === 'El Nino');
     const la_nina = param.find(x => x.data_input === 'La Nina');
@@ -18,22 +18,22 @@ export const ModifyData = (param :  Array<IDashboardRainfall>  = []) =>{
         return{
             id: index,
             month: item.text,
-            normal : normal ? convertStringToInt( 
+            normal : normal ? parseInt( 
                 normal [ monthText ]
             ) : 0,
-            el_nino: el_nino ? convertStringToInt( 
+            el_nino: el_nino ? parseInt( 
                 el_nino[ monthText ] 
             ): 0,
-            la_nina: la_nina ? convertStringToInt(
+            la_nina: la_nina ? parseInt(
                 la_nina[ monthText ]
             ) : 0,
-            actual_year: actual_year ? convertStringToInt(
+            actual_year: actual_year ? parseInt(
                 actual_year[ monthText ]
             ) : 0,
-            projection_2050: projection ? convertStringToInt(
+            projection_2050: projection ? parseInt(
                 projection[ monthText ]
             ) : 0,
-            forecast: forecast ? convertStringToInt(
+            forecast: forecast ? parseInt(
                 forecast[ monthText ]
             ) : 0,
         }
@@ -42,6 +42,16 @@ export const ModifyData = (param :  Array<IDashboardRainfall>  = []) =>{
     return data;
 }
 
-const convertStringToInt = (number : string) : number => {
-    return parseInt(number);
-}   
+export const getDashboardData = (
+    param :  Array<IDashboardRainfall> = [], 
+    key : string
+)  =>{
+    const dataObject = param.find(x => x.data_input === key);
+    const dataArray = MONTHS.map((item, index) =>{
+        return{
+            x : item.text.substring(0,3).toLocaleUpperCase(),
+            y : dataObject ? parseInt(dataObject[item.text]) : 0
+        }
+    });
+    return dataArray;
+}

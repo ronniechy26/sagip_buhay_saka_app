@@ -1,4 +1,5 @@
 export * from './actionContants';
+export * from './ChartData';
 
 type IMonths = {
     text : "january" | "february" | "march" | "april" | "may" | "june" | "july" | "august" | "september" | "october" | "november" | "december";

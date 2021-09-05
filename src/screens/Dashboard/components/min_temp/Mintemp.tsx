@@ -1,9 +1,10 @@
 import React, { useRef } from 'react';
 import { View, useWindowDimensions, Animated } from 'react-native';
 
-import { Images } from '../../../../theme';
+import MintempChart from './MintempChart';
+import { Images,  } from '../../../../theme';
 import {CardIcon, Legend, ScrollIndicator} from '../../../../components';
-import RainfallChart from './RainfallChart';
+
 import { IDashboardRainfall } from '../../../../models/DashboardModel';
 import { chartData } from '../../../../constants/ChartData';
 import { getDashboardData } from '../../../../selectors/DashboardSelectors';
@@ -14,7 +15,7 @@ interface IProps  {
     status : any
 }
 
-const Rainfall : React.FC<IProps> = (props) => {
+const Mintemp : React.FC<IProps> = (props) => {
     const scrollX = useRef(new Animated.Value(0)).current;
     const { width } = useWindowDimensions();
 
@@ -26,8 +27,8 @@ const Rainfall : React.FC<IProps> = (props) => {
         ]}>
             <View style={chartStyles.header}>
                 <CardIcon 
-                    icon={Images.RainIcon}
-                    title="Rainfall"
+                    icon={Images.Min}
+                    title="Min Temperature"
                 />
             </View>
             <Animated.ScrollView
@@ -54,7 +55,7 @@ const Rainfall : React.FC<IProps> = (props) => {
                                 }}
                             >
                                 <View style={{marginTop : -35}}>
-                                    <RainfallChart 
+                                    <MintempChart    
                                         color={item.color}
                                         data={ getDashboardData(props.data, item.key)}
                                     />
@@ -74,6 +75,6 @@ const Rainfall : React.FC<IProps> = (props) => {
     )
 }
 
-export default Rainfall;
+export default Mintemp;
 
 

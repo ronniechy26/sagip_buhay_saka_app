@@ -3,8 +3,7 @@ import { Dimensions } from 'react-native';
 import { 
     VictoryChart, 
     VictoryAxis, 
-    VictoryScatter, 
-    VictoryLine, 
+    VictoryArea,
     VictoryLabel,
     VictoryGroup
 } from 'victory-native';
@@ -40,25 +39,12 @@ const RainfallChart : React.FC<IProps> = (props) => {
                 }}
                 // domain={{y: [getMin(props.data), getMax(props.data) ]}}
             >
-                <VictoryLine 
-                    style={{
-                        data : {
-                            stroke : props.color
-                        },
-                        parent : {
-                            border : "1px solid #ccc"
-                        },
-                    }}
+                <VictoryArea
+                    interpolation="natural"
                     data={props.data}
-                />
-                <VictoryScatter
-                    data={props.data}
-                    size={5}
-                    style={{
-                        data : {
-                            fill : props.color
-                        }
-                    }}
+                    style={{ data: { fill: props.color} }}
+                    // labels={({ datum } : any) => datum.y}
+                    // labelComponent={<VictoryLabel renderInPortal dy={-20}/>}
                 />
             </VictoryGroup>
 

@@ -1,5 +1,10 @@
-import React, { ComponentType } from 'react';
+import { ComponentType } from 'react';
 import Dashboard from "../screens/Dashboard";
+import Recipient from '../screens/Recipients';
+import Advisories from '../screens/Advisories';
+import Feedback from '../screens/Feedback';
+import Configuration from '../screens/Configuration';
+import Users from '../screens/Users';
 
 const data : IData[] = [
     {
@@ -9,27 +14,27 @@ const data : IData[] = [
     },
     {
         name  : 'Recipient',
-        component: Dashboard,
+        component: Recipient,
         iconName : 'address-card'
     },
     {
         name  : 'Advisory',
-        component: Dashboard,
+        component: Advisories,
         iconName : 'cloud-sun-rain'
     },
     {
         name  : 'Feedbacks',
-        component: Dashboard,
+        component: Feedback,
         iconName : 'comments'
     },
     {
         name  : 'Configuration',
-        component: Dashboard,
+        component: Configuration,
         iconName : 'cogs'
     },
     {
         name  : 'Users',
-        component: Dashboard,
+        component: Users,
         iconName : 'users'
     },
 ]

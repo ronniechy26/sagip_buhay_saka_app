@@ -6,7 +6,7 @@ import { startCase, toLower } from 'lodash';
 import { IRecipient } from '../../../models/RecipientModel';
 import { Colors, Fonts } from '../../../theme';
 
-const ITEM_SIZE = 45 + 20 + 20 + 15 ;
+const ITEM_SIZE = 45 + 15 + 15 + 15 ;
 
 interface IProps {
     item : IRecipient,
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
         flex : 1,
         flexDirection : 'row',
         justifyContent : 'space-between',
-        padding : 20,
+        padding : 15,
         marginBottom : 15,
         backgroundColor : 'rgb(255,255,255)',
         borderRadius : 12,

@@ -1,5 +1,4 @@
 import React from 'react';
-import { View, Text} from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons'; 
 import { createDrawerNavigator, DrawerContentComponentProps } from '@react-navigation/drawer';
 import { connect } from 'react-redux';

@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 import { TYPE_FETCHING, TYPE_FETCHED, TYPE_ERROR } from '../constants';
 import UserReducer from '../reducers/UserReducer';
 import DashboardReducer from './DashboardReducer';
+import RecipientReducer from './RecipientReducer';
 
 export interface IStatus {
     error: any;
@@ -30,7 +31,8 @@ export type IReturnPromise<T> = T extends Promise<infer U> ? U : T;
 
 export const reducersList = {
     UserReducer,
-    DashboardReducer
+    DashboardReducer,
+    RecipientReducer
 };
 export type IReducer = {
     [key in keyof typeof reducersList]: typeof reducersList[keyof typeof reducersList];

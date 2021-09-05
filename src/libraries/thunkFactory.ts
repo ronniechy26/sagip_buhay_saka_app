@@ -23,7 +23,7 @@ const thunkCreator = <C extends string, T>(
                 payload: res as T,
             });
             return { payload: res as T };
-        } catch (e) {
+        } catch (e : any) {
             dispatch({
                 type: actionType,
                 status: TYPE_ERROR,
@@ -80,7 +80,7 @@ function thunkFactory<T extends IThunk>(actions: T): IThunkActions<T> {
             const t = actions[e];
             return {
                 ...a,
-                [e]: (...args) =>
+                [e]: (...args : any) =>
                     thunkCreator(t.type, () => t.service(...args), t.meta),
             };
         },

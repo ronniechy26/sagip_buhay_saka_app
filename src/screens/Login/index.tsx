@@ -79,7 +79,7 @@ const App: React.FC<IProps> = (props) => {
 }
 
 const mapStateToProps = (state: IState) => ({
-  data: state.UserReducer.data,
+  data: state.UserReducer.data_user,
   status : getUserStatus(state),
 });
 

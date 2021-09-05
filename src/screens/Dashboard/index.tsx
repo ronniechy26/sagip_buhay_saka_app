@@ -85,7 +85,7 @@ const Dashboard : React.FC<IProps> = (props) => {
 
 
 const mapStateToProps = (state: IState) => ({
-    user : state.UserReducer.data,
+    user : state.UserReducer.data_user,
     rainfall : state.DashboardReducer.rainfall,
     min_temp : state.DashboardReducer.min_temp,
     mean_temp : state.DashboardReducer.mean_temp,

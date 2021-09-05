@@ -97,8 +97,8 @@ export type IAsyncAction = {
 export type IReducerAction = ISyncAction | IAsyncAction;
 
 export interface IUserState extends ICommonState<IReducerAction> {
-    data? : IUser;
-    list? : Array<IUser>;
+    data_user? : IUser;
+    list_user? : Array<IUser>;
     selected_user? : IUser;
 }
 
@@ -123,26 +123,26 @@ export const UserReducer = (
 
             return {
                 ...state,
-                data: get(action, 'payload.user'),
+                data_user: get(action, 'payload.user'),
             };
         }
 
         case actionTypes.USER_FETCH_DATA : 
             return {
                 ...state,
-                data: action.payload,
+                data_user: action.payload,
             };
 
         case actionTypes.USER_FETCH_LIST : 
             return {
                 ...state,
-                list : action?.payload?.data,
+                list_user : action?.payload?.data,
             };
 
         case actionTypes.USER_LOGOUT:
             return {
                 ...state,
-                data: undefined,
+                data_user: undefined,
             };
             
         case actionTypes.USER_SET_SELECTED : 
@@ -160,8 +160,8 @@ export const UserReducer = (
         case actionTypes.USER_ADD : 
             return {
                 ...state,
-                list : [
-                    ...state.list as IUser[], 
+                list_user : [
+                    ...state.list_user as IUser[], 
                     action?.payload?.user as IUser
                 ]
             };

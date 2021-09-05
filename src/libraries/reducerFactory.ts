@@ -1,6 +1,6 @@
 import { TYPE_FETCHING, TYPE_FETCHED, TYPE_ERROR } from '../constants';
 import { UserReducer, IUserState } from '../reducers/UserReducer';
-// import { RecipientReducer, IRecipientState} from '../ducks/ReicipientDuck';
+import { RecipientReducer, IRecipientState} from '../reducers/RecipientReducer';
 // import { LivelihoodReducer, ILivelihoodState} from '../ducks/LivelihoodDucks';
 // import { RiskReducer, IRiskState} from '../ducks/RiskDucks';
 // import { ProductionStageReducer, IProductionStageState} from '../ducks/ProductionStageDucks';
@@ -18,7 +18,7 @@ import { DashboardReducer, IDashboardState} from '../reducers/DashboardReducer';
 
 export interface IReducerWrapper {
     (reducer: typeof UserReducer, defaultState: IUserState): typeof UserReducer;
-    // (reducer: typeof RecipientReducer, defaultState: IRecipientState): typeof RecipientReducer;
+    (reducer: typeof RecipientReducer, defaultState: IRecipientState): typeof RecipientReducer;
     // (reducer: typeof LivelihoodReducer, defaultState: ILivelihoodState): typeof LivelihoodReducer;
     // (reducer: typeof RiskReducer, defaultState: IRiskState): typeof RiskReducer;
     // (reducer: typeof ProductionStageReducer, defaultState: IProductionStageState): typeof ProductionStageReducer;

@@ -1,8 +1,4 @@
-import { IState, IStatus } from '../reducers/RootReducer';
-import { IReducerAction } from '../reducers/RecipientReducer';
+import { IState } from '../reducers/RootReducer';
 
-export const getRecipientStatus = (
-    state: IState,
-    action : IReducerAction['type']
-): any => state.RecipientReducer.status
+export const getRecipientStatus = (state: IState): any => state.RecipientReducer.status
 

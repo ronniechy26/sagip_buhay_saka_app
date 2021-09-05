@@ -16,7 +16,9 @@ if(__DEV__) {
 const getFonts = () => Font.loadAsync({
   'nunito-regular': require('./src/assets/fonts/Nunito-Regular.ttf'),
   'nunito-bold': require('./src/assets/fonts/Nunito-Bold.ttf'),
-  'nunito-semibold' : require('./src/assets/fonts/Nunito-SemiBold.ttf')
+  'nunito-semibold' : require('./src/assets/fonts/Nunito-SemiBold.ttf'),
+  'nunito-semibolditalic' : require('./src/assets/fonts/Nunito-SemiBoldItalic.ttf'),
+  'nunito-bolditalic' : require('./src/assets/fonts/Nunito-BoldItalic.ttf')
 });
 
 export default function App() {

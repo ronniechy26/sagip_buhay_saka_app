@@ -17,7 +17,23 @@ export const actionTypes = {
     RECIPIENT_UPDATE : 'RECIPIENT_UPDATE',
     RECIPIENT_ACTIVATE : 'RECIPIENT_ACTIVATE',
     RECIPIENT_DEACTIVATE : 'RECIPIENT_DEACTIVATE',
+    RECIPIENT_REFRESH : 'RECIPIENT_REFRESH'
 } as const;
+
+export const syncActions = {
+    onRefresh: (data : IRecipient[]) => ({
+        type: actionTypes.RECIPIENT_REFRESH,
+        payload: data,
+    }),
+};
+
+export type ISyncActions = typeof syncActions;
+export type ISyncAction = {
+    [key in keyof ISyncActions]: ICustomAction<
+        ReturnType<ISyncActions[key]>['type'],
+        ReturnType<ISyncActions[key]>['payload']
+    >;
+}[keyof ISyncActions];
 
 const thunkActions = {
     fetch_recipients : {
@@ -56,7 +72,7 @@ export type IAsyncAction = {
     >;
 }[keyof IThunkActions];
 
-export type IReducerAction = IAsyncAction;
+export type IReducerAction = IAsyncAction | ISyncAction;
 
 export interface IRecipientState extends ICommonState<IReducerAction> {
     list_recipient? : Array<IRecipient>;
@@ -95,6 +111,12 @@ export const RecipientReducer = (
             return {
                 ...state,
                 data_recipient : action?.payload?.recipient,
+            };
+
+        case actionTypes.RECIPIENT_REFRESH : 
+            return {
+                ...state,
+                list_recipient : action.payload as IRecipient[],
             };
 
         default:

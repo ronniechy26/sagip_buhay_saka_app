@@ -27,7 +27,7 @@ const RainfallChart : React.FC<IProps> = (props) => {
     const getMin = (arr : any) =>{
         return Math.min.apply(Math, arr.map((x : any) => x.y));
     }
-    console.log(getMin(props.data), getMax(props.data))
+    // console.log(getMin(props.data), getMax(props.data))
     return (
         <VictoryChart
             theme={VictoryTheme}

@@ -1,15 +1,18 @@
-import React, { useEffect, useRef } from 'react'
-import { View, StyleSheet, Animated } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react'
+import { View, StyleSheet, Animated, RefreshControl} from 'react-native';
 import { ActivityIndicator, FAB , Searchbar } from 'react-native-paper';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
+import axios from 'axios';
+import { get } from 'lodash';
+import { showMessage } from 'react-native-flash-message';
 
 import { IState } from '../../reducers/rootReducer';
-import { asyncActions } from '../../reducers/RecipientReducer';
+import { asyncActions, syncActions } from '../../reducers/RecipientReducer';
 import { getRecipientStatus } from '../../selectors/RecipientSelector';
 import { IRecipient } from '../../models/RecipientModel';
 import RecipientCard from './components/RecipientCard';
-import { Colors, Fonts } from '../../theme';
+import { Colors, Fonts, showMessageStyle } from '../../theme';
 
 type IProps = ReturnType<typeof mapStateToProps> &
     ReturnType<typeof mapDispatchToProps>;
@@ -17,14 +20,51 @@ type IProps = ReturnType<typeof mapStateToProps> &
 const Recipient : React.FC<IProps> = (props) =>{
     const scrollY = useRef(new Animated.Value(0)).current;
     const [searchQuery, setSearchQuery] = React.useState('');
+    const loading_fetch = (props.status['RECIPIENT_FETCH_LIST'] ? props.status['RECIPIENT_FETCH_LIST'].fetching : true);
+    const [refreshing, setRefreshing] = useState(false);
+    const [dataSource, setDataSource] = useState<IRecipient[]>([]);
+    const dispatch = useDispatch()
 
-    const loading_fetch = (props.status['RECIPIENT_FETCH_LIST'] ? props.status['RECIPIENT_FETCH_LIST'].fetching : false);
- 
     useEffect(() => {
         props.fetch_recipients();
-    }, [])
+    }, []);
 
-    if(loading_fetch ){
+    useEffect(() => {
+        setDataSource(props.list as IRecipient[]);
+    }, [props.list]);
+
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        axios.get(`${process.env.API_ENDPOINT}/api/recipients`)
+        .then((e) => {
+            dispatch(syncActions.onRefresh(e.data.data as IRecipient[]));
+        }).catch((e) =>{
+            showMessage({
+                message: get(e, 'response.data.messages', e.message),
+                type: "danger",
+                icon : 'danger',
+                ...showMessageStyle
+            });
+            setRefreshing(false);
+        }).finally(()=>{
+            setRefreshing(false);
+        })
+    }, []);
+
+    const onSearch = (text : string) => {
+        const data = props.list && props.list.filter((item) => {
+            if( item.first_name.toLocaleLowerCase().includes(text) || 
+                item.last_name.toLocaleLowerCase().includes(text) || 
+                item.contact_number.toLocaleLowerCase().includes(text) ){
+                return {
+                    ...item
+                }
+            }
+        });
+        setDataSource(data as IRecipient[]);
+    }
+
+    if(loading_fetch){
         return(
             <ActivityIndicator
                 color={Colors.primary}
@@ -34,9 +74,10 @@ const Recipient : React.FC<IProps> = (props) =>{
                     justifyContent : 'center',
                     alignItems : 'center'
                 }}
-          />
+            />
         )
     }
+    
     return(
         <View style={styles.container}>
             <View style={styles.header}>
@@ -49,19 +90,19 @@ const Recipient : React.FC<IProps> = (props) =>{
                         fontFamily : Fonts.REGULAR
                     }}
                     style={styles.shadow}
-                    onSubmitEditing={(e) => {
-                        console.log(e.nativeEvent.text)
-                    }}
+                    onSubmitEditing={(e) => onSearch(e.nativeEvent.text)}
                 />
             </View>
             <Animated.FlatList
                 scrollEventThrottle={16}
                 onScroll={Animated.event([{
-                        nativeEvent : {contentOffset : { y : scrollY}}
+                    nativeEvent : {contentOffset : { y : scrollY}}
                 }],{ useNativeDriver : true })}
                 contentContainerStyle={{padding : 10}}
-                data={props.list as IRecipient[] ?? []}
-                keyExtractor={(item) => item.id }
+                data={dataSource}
+                keyExtractor={(item) => {
+                    return item.id.toString();
+                }}
                 renderItem={( { item, index }) =>{
                     return(
                         <RecipientCard 
@@ -71,8 +112,14 @@ const Recipient : React.FC<IProps> = (props) =>{
                         />
                     )
                 }}
+                refreshControl={
+                    <RefreshControl
+                        refreshing={refreshing}
+                        onRefresh={onRefresh}
+                    />
+                }
             />
-             <FAB
+            <FAB
                 style={styles.fab}
                 small={false}
                 icon="contacts"
